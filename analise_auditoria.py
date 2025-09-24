@@ -2,8 +2,8 @@ import pandas as pd
 import locale
 import os # Biblioteca para interagir com o sistema operacional, usada aqui para pegar a extensão do arquivo
 
-# --- CONFIGURAções ---
-# Agora você pode colocar 'sua_planilha.xlsx' ou 'seus_dados.csv'
+# --- CONFIGURAÇÕES ---
+# você pode colocar 'sua_planilha.xlsx' ou 'seus_dados.csv'
 NOME_ARQUIVO = 'amostra_dados.xlsx' 
 
 # Substitua pelo nome exato da coluna que contém os valores
@@ -42,7 +42,7 @@ try:
         df = pd.read_excel(NOME_ARQUIVO)
     elif extensao == '.csv':
         # CSVs no Brasil frequentemente usam ';' como separador. Se o seu usar ',', altere para sep=','
-        df = pd.read_csv(NOME_ARQUIVO, sep=';') 
+        df = pd.read_csv(NOME_ARQUIVO, sep=None, engine='python')
     else:
         # Se o formato não for suportado, levanta um erro claro
         raise ValueError(f"Formato de arquivo não suportado: '{extensao}'. Por favor, use .xlsx ou .csv.")
