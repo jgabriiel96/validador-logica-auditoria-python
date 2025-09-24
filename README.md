@@ -137,5 +137,3 @@ Para executar este script de validação em sua máquina local, siga os passos a
 &nbsp;   python analise\_auditoria.py
 
 &nbsp;   ```
-
-xx

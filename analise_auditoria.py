@@ -84,5 +84,3 @@ except ValueError as ve:
     print(f"\nERRO: {ve}")
 except Exception as e:
     print(f"\nOcorreu um erro inesperado: {e}")
-
-    xx
