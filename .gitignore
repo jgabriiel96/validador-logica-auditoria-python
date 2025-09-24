@@ -13,7 +13,8 @@ env/
 *.csv
 *.xlsx
 
-# Exceções (não ignora estes arquivos específicos)
+# Exceï¿½ï¿½es (nï¿½o ignora estes arquivos especï¿½ficos)
 !.gitignore
 !amostra_dados.csv
 !amostra_dados.xlsx
+xx
