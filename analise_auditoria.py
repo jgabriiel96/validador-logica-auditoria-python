@@ -4,7 +4,7 @@ import os # Biblioteca para interagir com o sistema operacional, usada aqui para
 
 # --- CONFIGURAções ---
 # Agora você pode colocar 'sua_planilha.xlsx' ou 'seus_dados.csv'
-NOME_ARQUIVO = 'valores.xlsx' 
+NOME_ARQUIVO = 'amostra_dados.xlsx' 
 
 # Substitua pelo nome exato da coluna que contém os valores
 NOME_COLUNA_VALORES = 'Diferença' 

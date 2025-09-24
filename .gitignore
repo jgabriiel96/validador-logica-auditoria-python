@@ -1,0 +1,19 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*.class
+
+# Arquivos de ambiente virtual
+venv/
+.venv/
+env/
+.env
+
+# Arquivos de dados (ignora todos os .csv e .xlsx)
+*.csv
+*.xlsx
+
+# Exceções (não ignora estes arquivos específicos)
+!.gitignore
+!amostra_dados.csv
+!amostra_dados.xlsx
