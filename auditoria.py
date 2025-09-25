@@ -3,17 +3,29 @@ import locale
 
 def limpar_valor(valor_texto: str) -> float:
     """
-    Converte uma string de moeda brasileira em float.
-    Exemplo: 'R$ 1.234,56' -> 1234.56
+    Converte uma string de moeda para float, lidando com os formatos
+    'R$ 1.234,56' (padrão BR) e 'R$ 1234.56' (padrão direto/US).
     """
     try:
         valor_texto = str(valor_texto)
+        # Remove o prefixo "R$" e qualquer texto extra como " (pago a mais)"
         valor_limpo = valor_texto.split('(')[0].replace('R$', '').strip()
-        valor_limpo = valor_limpo.replace('.', '').replace(',', '.')
+
+        # Verifica se o formato é brasileiro (contém vírgula como decimal)
+        if ',' in valor_limpo and '.' in valor_limpo:
+            # Formato "1.234,56" -> remove o ponto de milhar, depois troca a vírgula por ponto
+            valor_limpo = valor_limpo.replace('.', '').replace(',', '.')
+        elif ',' in valor_limpo:
+            # Formato "1234,56" -> apenas troca a vírgula por ponto
+             valor_limpo = valor_limpo.replace(',', '.')
+        
+        # Se não houver vírgula, o formato já é "1234.56", então não fazemos nada com o ponto.
+        # Apenas removemos vírgulas que possam ser de milhar (ex: "1,234.56")
+        valor_limpo = valor_limpo.replace(',', '')
+
         return float(valor_limpo)
     except (ValueError, TypeError):
         return 0.0
-
 
 def analisar_dataframe(df: pd.DataFrame, coluna: str) -> dict:
     """
