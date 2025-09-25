@@ -71,9 +71,9 @@ try:
         print("------------------------------------------")
 
         if resultado_final > 0:
-            print("Conclusão: O balanço final indica que foram realizados pagamentos a mais.")
+            print(f"Conclusão: O balanço final indica que foi realizado {locale.currency(resultado_final, grouping=True)} a mais.")
         elif resultado_final < 0:
-            print("Conclusão: O balanço final indica que foram realizados pagamentos a menos.")
+            print(f"Conclusão: O balanço final indica que foi realizado {locale.currency(resultado_final, grouping=True)} a menos.")
         else:
             print("Conclusão: O balanço final é zero.")
 
