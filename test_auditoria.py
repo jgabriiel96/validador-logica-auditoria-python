@@ -95,3 +95,23 @@ def test_formatar_resultado():
     # se frases importantes estão presentes na string de saída.
     assert "RESULTADO FINAL DA AUDITORIA" in saida
     assert "a mais" in saida # Verifica se a conclusão está correta para um resultado positivo.
+
+def test_formatar_resultado_negativo():
+    """
+    Testa a função `formatar_resultado` para garantir que a conclusão
+    está correta quando o resultado final da auditoria é negativo.
+    """
+    # PREPARAÇÃO: Cria um dicionário de resultado com um valor final negativo.
+    resultado = {
+        "total_linhas": 3,
+        "total_pago_a_mais": 50.0,
+        "total_pago_a_menos": -300.0,
+        "resultado_final": -250.0,
+    }
+    
+    # EXECUÇÃO: Chama a função de formatação.
+    saida = formatar_resultado(resultado)
+
+    # VERIFICAÇÃO: Garante que a conclusão contém a frase "a menos".
+    assert "RESULTADO FINAL DA AUDITORIA" in saida
+    assert "a menos" in saida
