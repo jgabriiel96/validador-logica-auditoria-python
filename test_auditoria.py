@@ -14,24 +14,34 @@ import pandas as pd  # Para criar DataFrames de teste
 import pytest      # Framework de testes
 from auditoria import limpar_valor, analisar_dataframe, formatar_resultado # Importa as funções que vamos testar
 
-# --- Testes para a função limpar_valor ---
+# --- Testes para a função limpar_valor (versão parametrizada) ---
 
-def test_limpar_valor():
-    """
-    Testa a função `limpar_valor` com diferentes formatos de entrada para garantir
-    que a conversão para float seja feita corretamente.
-    """
+@pytest.mark.parametrize("input_valor, resultado_esperado", [
     # Cenário 1: Testa um valor padrão no formato brasileiro com separador de milhar.
-    assert limpar_valor("R$ 1.234,56") == 1234.56
-    
+    ("R$ 1.234,56", 1234.56),
     # Cenário 2: Testa o valor zero.
-    assert limpar_valor("R$ 0,00") == 0.0
+    ("R$ 0,00", 0.0),
+    # Cenário 3: Testa um input nulo (None).
+    (None, 0.0),
+    # Cenário 4: Testa um texto que não é um número.
+    ("texto inválido", 0.0),
+    # Cenário 5: Testa o formato direto com ponto decimal.
+    ("R$ 199.99", 199.99),
+    # Cenário 6: Testa o formato com parênteses e valor negativo.
+    ("R$ -50.25 (pago a menos)", -50.25),
+    # Cenário 7: Testa uma string vazia.
+    ("", 0.0)
+])
+def test_limpar_valor(input_valor, resultado_esperado):
+    """
+    Testa a função `limpar_valor` com múltiplos cenários de entrada
+    para garantir que a conversão para float seja feita corretamente.
     
-    # Cenário 3: Testa um input nulo (None). A função deve retornar 0.0 e não quebrar.
-    assert limpar_valor(None) == 0.0
-    
-    # Cenário 4: Testa um texto que não é um número. A função deve retornar 0.0 e não quebrar.
-    assert limpar_valor("texto inválido") == 0.0
+    Este teste é "parametrizado", o que significa que o Pytest irá executar esta mesma
+    função uma vez para cada tupla na lista acima, preenchendo as variáveis
+    `input_valor` e `resultado_esperado` a cada execução.
+    """
+    assert limpar_valor(input_valor) == resultado_esperado
 
 
 # --- Testes para a função analisar_dataframe ---
@@ -77,8 +87,8 @@ def test_analisar_dataframe_coluna_invalida():
 
 def test_formatar_resultado():
     """
-    Testa a função `formatar_resultado` para garantir que o texto de saída
-    contenha as informações chave esperadas.
+    Testa a função `formatar_resultado` para garantir que a conclusão
+    está correta quando o resultado final da auditoria é positivo.
     """
     # PREPARAÇÃO: Cria um dicionário de resultado de exemplo.
     resultado = {
